@@ -1,6 +1,15 @@
 # pvsky_nav
 java maven sprint boot
 
+# build
+## dev环境
+mvn clean package -P dev -D version=x.x.x
+## test环境
+mvn clean package -P test -D version=x.x.x
+## staging环境
+mvn clean package -P staging -D version=x.x.x
+## prod环境
+mvn clean package -P prod -D version=x.x.x
 
 # HELP Getting Started
 

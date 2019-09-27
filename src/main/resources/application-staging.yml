@@ -1,0 +1,11 @@
+logging:
+  file: "logs/nav_base.log"
+
+server:
+  port: 8083
+  servlet:
+    context-path: /${spring.application.name}
+
+spring:
+  application:
+    name: nav_base   

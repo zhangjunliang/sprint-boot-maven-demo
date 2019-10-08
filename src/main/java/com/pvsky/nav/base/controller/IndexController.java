@@ -1,5 +1,7 @@
 package com.pvsky.nav.base.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -18,8 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
  
 @RestController
 @RequestMapping("/index")
@@ -90,5 +93,22 @@ public class IndexController {
             }
         }
         return result+"&name="+this.name;
+    }
+
+    @PostMapping("/demo/upload")
+    @ResponseBody
+    String upload(@RequestParam("file") MultipartFile file) {
+        if(file.isEmpty()) {
+            return "请选择文件";
+        }
+        String fileName = file.getOriginalFilename();
+        String filePath = "/Users/zhangjunliang/download/";
+        File dest = new File(filePath + fileName);
+        try {
+            file.transferTo(dest);
+            return "上传成功";
+        } catch (IOException e) {
+            return "Error:"+e.toString();
+        }
     }
 }
